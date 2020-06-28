@@ -7,8 +7,9 @@ class Controller {
 
   constructor(numberOfUsers) {
     this.numberOfUsers = numberOfUsers;
-    this.data = [];
-    this.view = new Viewmaster()
+    this.view = new Viewmaster() //instantiates the view this controller will control
+    this.model = new Datafetcher('https://randomuser.me/api/') //instantiates the model the controller will manipulate and pass to the view
+    this.valueArray = [];
   }
 
   /*
@@ -17,29 +18,25 @@ getUserPromises(number) - accepts a number or users to get profile information f
 @async the function awaits userPromise.data before pushing the data onto the promiseArray
 - gets a number of userPromises equal to the number passed to it by args
 - for each number passed to it, it creates a new Datafetcher object, awaits its data to push its data property into a promise promiseArray
-- uses Promise.all to push individal response data into the controllers data array
+- uses Promise.all to create the initial gallery, and locally store the user information in the Datafetcher model via its setter
   */
 
 
-  async getUserPromises() {
+  async loadUserPromises() {
       try {
-        let promiseArray = [];
         for (let i=0 ; i < this.numberOfUsers; i+=1) {
-          let userPromise = new Datafetcher('https://randomuser.me/api/')
-          await promiseArray.push(userPromise.data)
+          await this.model.goFetch()
+          this.createGallery(this.view,this.model.data[i])
         }
-        Promise.all(promiseArray).then( values => {
-          for(let i = 0; i < values.length; i+=1){
-            console.log(values[i])
-            this.data.push(values[i])
-            this.createGallery(this.view, values[i])
-          }
-        })
-
       } catch(error) {
           console.log(error)
         }
       }
+
+/*
+  create
+
+*/
 
 /*
 takes the view object (template), and a data object (to bind to)

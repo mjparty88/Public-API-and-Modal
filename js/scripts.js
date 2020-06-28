@@ -6,6 +6,6 @@ app.js
 
 //initiate the application with 12 profiles
 const theFatController = new Controller(12)
-theFatController.getUserPromises()
+theFatController.loadUserPromises()
 
 //initatie the view object, containing all the templates

@@ -1,18 +1,33 @@
 /*
 Reuseable Datafetcher Class
 - constructed with a URL
-- Its job is to fetch data from APIs and provide responses. That's it.
+- Its job is to fetch data from APIs and provide responses.
+- It also masters the data model for the website
 */
 
 class Datafetcher {
  constructor(url) {
    this.url = url; //the URL being passed to the data fetcher
-   this.data = fetch(this.url)
-                 .then(this.checkStatus)
-                 .then(response => response.json())
-                 .then(data => data['results'][0])
-                 .catch(error => console.log("there was a problem getting the data", error))
-                 //the actual response received by the fetch()
+   this.data = [];
+ }
+
+ set dataArray(dataArray)  {
+	this._dataArray = dataArray
+  }
+
+  get dataArray()  {
+ 	return this._dataArray
+  }
+
+
+ async goFetch() {
+
+   await fetch(this.url)
+          .then(this.checkStatus)
+          .then(response => response.json())
+          .then(data => this.data.push(data['results'][0]))
+          .catch(error => console.log("there was a problem getting the data", error))
+    //the actual response received by the fetch()
  }
 
 /*
