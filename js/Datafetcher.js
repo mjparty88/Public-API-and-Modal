@@ -6,19 +6,11 @@ Reuseable Datafetcher Class
 */
 
 class Datafetcher {
+
  constructor(url) {
    this.url = url; //the URL being passed to the data fetcher
    this.data = [];
  }
-
- set dataArray(dataArray)  {
-	this._dataArray = dataArray
-  }
-
-  get dataArray()  {
- 	return this._dataArray
-  }
-
 
  async goFetch() {
 

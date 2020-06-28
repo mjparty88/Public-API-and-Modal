@@ -144,7 +144,7 @@ createModal(dataObject){
    closeButton.innerHTML = "<strong>X</strong>"
 
    const modalInfo = document.createElement("div")
-   modalInfor.className = "modal-info-container"
+   modalInfo.className = "modal-info-container"
 
    const modalImg = document.createElement("img")
    modalImg.setAttribute("src",dataObject.picture.large)
@@ -172,14 +172,14 @@ createModal(dataObject){
 
    const modalAddress = document.createElement("p")
    modalAddress.className = "modal-text"
-   modalAddress.innerHTML = `${dataObject.location.street.number} ${dataObject.location.street.name}, ${dataObject.location.city}, ${dataObject.location.state} ${dataObject.location.postcode}`
+   modalAddress.innerHTML = dataObject.location.street.number + " " + dataObject.location.street.name + ", " + dataObject.location.city + ", " + dataObject.location.state + " " + dataObject.location.postcode
 
-   const modalADob = document.createElement("p")
-   modalAddress.className = "modal-text"
-   modalAddress.innerHTML = `Birthday: ${dataObject.dob.date}`
+   const modalDob = document.createElement("p")
+   modalDob.className = "modal-text"
+   modalDob.innerHTML = `Birthday: ${dataObject.dob.date}`
 
    const modalButtonContainer = document.createElement("div")
-   modalBUttonContainer.className = "modal-btn-container"
+   modalButtonContainer.className = "modal-btn-container"
 
    const modalPrevButton = document.createElement("button")
    modalPrevButton.setAttribute("type","button")
@@ -188,10 +188,10 @@ createModal(dataObject){
    modalPrevButton.innerHTML = "Prev"
 
    const modalNextButton = document.createElement("button")
-   modalPrevButton.setAttribute("type","button")
-   modalPrevButton.setAttribute("id","modal-next")
-   modalPrevButton.className = "modal-next btn"
-   modalPrevButton.innerHTML = "Next"
+   modalNextButton.setAttribute("type","button")
+   modalNextButton.setAttribute("id","modal-next")
+   modalNextButton.className = "modal-next btn"
+   modalNextButton.innerHTML = "Next"
 
    //assemble the modalDiv
    this.putIn(modalInfo,modalImg)
@@ -201,7 +201,7 @@ createModal(dataObject){
    this.putIn(modalInfo,modalHr)
    this.putIn(modalInfo,modalPhone)
    this.putIn(modalInfo,modalAddress)
-   this.putIn(modalInfo,modalADob)
+   this.putIn(modalInfo,modalDob)
    this.putIn(modalDiv,closeButton)
    this.putIn(modalDiv,modalInfo)
 
@@ -213,6 +213,8 @@ createModal(dataObject){
    this.putIn(modalContainer,modalDiv)
    this.putIn(modalContainer,modalButtonContainer)
    this.putIn(document.querySelector("body"),modalContainer)
+
+   return modalContainer
 
  }
 
