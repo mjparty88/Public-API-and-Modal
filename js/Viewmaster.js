@@ -141,7 +141,7 @@ createModal(dataObject){
 
    const modalDob = document.createElement("p")
    modalDob.className = "modal-text"
-   modalDob.innerHTML = `Birthday: ${dataObject.dob.date}`
+   modalDob.innerHTML = "Birthday: "+ dataObject.dob.date.substring(0,10)
 
    const modalButtonContainer = document.createElement("div")
    modalButtonContainer.className = "modal-btn-container"
