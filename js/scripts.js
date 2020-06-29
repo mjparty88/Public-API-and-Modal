@@ -4,8 +4,8 @@ app.js
 - set up event handlers
 */
 
-//initiate the controller with 12 profiles
+//initiate theFatController with 12 profiles
 const theFatController = new Controller(12)
 
-//load up the application
-theFatController.loadUpUsers()
+//loads up the application
+theFatController.loadUp()

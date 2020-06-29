@@ -1,23 +1,34 @@
 /*
 Reuseable Datafetcher Class
+@Class
 - constructed with a URL
-- Its job is to fetch data from APIs and provide responses.
-- It also masters the data model for the website
+- Fetches, stores, and filters data for the controller
 */
 
 class Datafetcher {
 
- constructor(url) {
-   this.url = url; //the URL being passed to the data fetcher
+ constructor() {
+   this.url = 'https://randomuser.me/api/'; //the URL being passed to the data fetcher
    this.data = [];
+   this.visibleData = [];
  }
 
- async goFetch() {
+ /*
+ goFetch()
+ @async
+ - accepts a number as an argument
+ - the number gets added to the results query string at the end of the API URL
+ - awaits the result of fetch, and then spreads the result into its own data array
+ */
 
-   await fetch(this.url)
+ async goFetch(number) {
+   await fetch(this.url + "?results=" + number)
           .then(this.checkStatus)
           .then(response => response.json())
-          .then(data => this.data.push(data['results'][0]))
+          .then(data => {
+            this.data = [...data['results']]
+            this.visibleData = this.data;
+          })
           .catch(error => console.log("there was a problem getting the data", error))
     //the actual response received by the fetch()
  }

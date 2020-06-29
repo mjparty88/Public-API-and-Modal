@@ -1,11 +1,11 @@
 /*
 Reuseable Viewmaster
-- Handles creation of views to inject data into
+@Class
+- Creates HTML templates for inclusion into the DOM
 */
 
 class Viewmaster {
  constructor() {
-
 
  }
 
@@ -17,7 +17,9 @@ class Viewmaster {
    targetElement.appendChild(componentElement)
  }
 
-
+ /* createSearchForm()
+ - returns a search form
+ */
  createSearchForm() {
 
   const form = document.createElement("form")
@@ -31,8 +33,8 @@ class Viewmaster {
   searchInput.className = "search-input"
 
   const searchSubmit = document.createElement("input")
-  searchSubmit.setAttribute("type","search")
-  searchSubmit.setAttribute("value","&#x1F50D")
+  searchSubmit.setAttribute("type","submit")
+  searchSubmit.setAttribute("value","Search")
   searchSubmit.setAttribute("id", "search-submit")
   searchSubmit.className = "search-submit"
 
@@ -42,25 +44,12 @@ class Viewmaster {
 
  }
 
- /*
- takes a data object
- creates a gallery for the data
+ /* createGalleryItem()
+ - takes a data object
+ - returns a template for a galleryItem using the data provided
  */
 
  createGalleryItem(dataObject) {
-
-/*
- <div class="card">
-       <div class="card-img-container">
-           <img class="card-img" src="https://placehold.it/90x90" alt="profile picture">
-       </div>
-       <div class="card-info-container">
-           <h3 id="name" class="card-name cap">first last</h3>
-           <p class="card-text">email</p>
-           <p class="card-text cap">city, state</p>
-       </div>
-   </div>
-*/
 
   const galleryDiv = document.createElement("div")
   galleryDiv.className = "card"
@@ -101,36 +90,12 @@ class Viewmaster {
  }
 
  /* createModal()
- takes a data object
- creates a modal the data
+ - takes a data object
+ - returns a modal template containing the data
  */
 
 createModal(dataObject){
 
-  /*
-   <div class="modal-container">
-      <div class="modal">
-          <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
-          <div class="modal-info-container">
-              <img class="modal-img" src="https://placehold.it/125x125" alt="profile picture">
-              <h3 id="name" class="modal-name cap">name</h3>
-              <p class="modal-text">email</p>
-              <p class="modal-text cap">city</p>
-              <hr>
-              <p class="modal-text">(555) 555-5555</p>
-              <p class="modal-text">123 Portland Ave., Portland, OR 97204</p>
-              <p class="modal-text">Birthday: 10/21/2015</p>
-          </div>
-      </div>
-
-      // IMPORTANT: Below is only for exceeds tasks
-      <div class="modal-btn-container">
-          <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
-          <button type="button" id="modal-next" class="modal-next btn">Next</button>
-      </div>
-  </div>
-
-  */
    const modalContainer = document.createElement("div")
    modalContainer.className = "modal-container"
 
@@ -216,6 +181,24 @@ createModal(dataObject){
 
    return modalContainer
 
+ }
+
+ /* createModal()
+ - returns a p element with an error message
+ */
+
+ failureMessage() {
+   const message = document.createElement("p")
+   message.className = "failure-message"
+   message.innerHTML = "Sorry, we couldn't get the employees at this time"
+   return message
+ }
+
+ createEmptySearchMessage() {
+   const message = document.createElement("p")
+   message.className = "search-failure-message"
+   message.innerHTML = "None of our employees have a name with that character. Please search with an alphabetical letter, or hit search with a blank input to return all employees"
+   return message
  }
 
 }
