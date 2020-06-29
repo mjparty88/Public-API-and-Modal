@@ -94,16 +94,13 @@ createModal()
         const modalWindow = view.createModal(data)
         document.querySelector("body").insertBefore( document.querySelector(".modal-container"), document.querySelector("script"))
         document.getElementById("modal-close-btn").addEventListener("click", (e) => {
-          console.log(e.target.tagName)
           this.closeModal()
         })
         //put in the click handlers
         document.getElementById("modal-prev").addEventListener("click", (e) => {
-          console.log(e.target.tagName)
           this.prevModal()
           })
         document.getElementById("modal-next").addEventListener("click", (e) => {
-          console.log(e.target.tagName)
           this.nextModal()
           })
         //hide the previous button if it shouldn't be there
@@ -179,7 +176,7 @@ createModal()
       const query = document.getElementById("search-input").value.toString()
       const cards = document.querySelectorAll(".card")
       //if there is a search message from a previous search, remove it
-      if(document.querySelector("search-failure-message") != undefined) {
+      if(document.querySelector(".search-failure-message") != undefined) {
           document.getElementById("gallery").removeChild(document.querySelector(".search-failure-message"))
       }
       //if the search is empty, show all the cards, and give them all a className of searchHit
