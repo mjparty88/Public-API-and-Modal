@@ -164,6 +164,7 @@ createModal()
      const search = view.createSearchForm()
      view.putIn(document.querySelector(".search-container"), search)
      document.querySelector(".search-submit").addEventListener("click", (e) => {
+      e.preventDefault() //stops the search button from submitting a form and reloading new users!
       this.handleSearch()
      })
    }
@@ -175,6 +176,7 @@ createModal()
     handleSearch() {
       const query = document.getElementById("search-input").value.toString()
       const cards = document.querySelectorAll(".card")
+      const regex = /@[A-Za-z\.]/
       //if there is a search message from a previous search, remove it
       if(document.querySelector(".search-failure-message") != undefined) {
           document.getElementById("gallery").removeChild(document.querySelector(".search-failure-message"))
@@ -190,7 +192,8 @@ createModal()
         cards.forEach(element => {
           element.style.display = "none"
           element.className = "card"
-          if(element.children[1].firstElementChild.innerHTML.toLowerCase().includes(query.toLowerCase())) {
+          const cardemailSearch = element.children[1].children[1].innerHTML.replace(regex, '') //truncates the email - removes the @example.com from email addresses
+          if(cardemailSearch.toLowerCase().includes(query.toLowerCase())) { //compares the search input field against the truncated email
             element.style.display = ""
             element.className = element.className + " searchHit"
           }
