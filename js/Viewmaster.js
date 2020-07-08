@@ -96,6 +96,11 @@ class Viewmaster {
 
 createModal(dataObject){
 
+  const dob = new Date(dataObject.dob.date)
+  const month = dob.getMonth()+1 //get month returns January as 0 as if its an index in an array of months of the year
+  const date = dob.getDate()
+  const year = dob.getFullYear()
+
    const modalContainer = document.createElement("div")
    modalContainer.className = "modal-container"
 
@@ -141,7 +146,7 @@ createModal(dataObject){
 
    const modalDob = document.createElement("p")
    modalDob.className = "modal-text"
-   modalDob.innerHTML = "Birthday: "+ dataObject.dob.date.substring(0,10)
+   modalDob.innerHTML = "Birthday: "+ month +"/"+ date +"/"+ year
 
    const modalButtonContainer = document.createElement("div")
    modalButtonContainer.className = "modal-btn-container"
